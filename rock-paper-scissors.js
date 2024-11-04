@@ -51,6 +51,7 @@ function getHumanChoice() {
  * @returns one of "human", "computer", or "tie"
  */
 function playRound(humanChoice, computerChoice) {
+    console.log(`You chose: ${humanChoice}`)
     console.log(`The computer chose: ${computerChoice}`)
 
     if (humanChoice === "rock") {
@@ -97,12 +98,41 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-// Increment the winner's (computer or human) score
+function playGame() {
+    // Initialize the score variables
+    let humanScore = 0;
+    let computerScore = 0;
+    let ties = 0;
 
-// Start another round
+    // Play five rounds
+    for (round = 0; round < 5; round++) {
+        // Computers count from 0 but people count from 1
+        console.log(`Round ${round + 1}`)
 
-// Play five rounds
+        winner = playRound(getHumanChoice(), getComputerChoice());
 
-// Determine whoever won the most out of five rounds
+        // Increment the winner's (computer or human) score
+        if (winner === "human") {
+            humanScore++;
+        } else if (winner === "computer") {
+            computerScore++;
+        } else if (winner === "tie") {
+            ties++;
+        } else {
+            throw new SyntaxError(`${winner} is an invalid winner!`);
+        }
+    }
 
-// Announce the winner
+    console.log("After five rounds, the score is")
+    console.log(`Human: ${humanScore}, Computer: ${computerScore}, Ties: ${ties}`)
+
+    // Determine whoever won the most out of five rounds
+    // and announce the winner
+    if (humanScore > computerScore) {
+        console.log("Congratulations! You won!");
+    } else if (computerScore > humanScore) {
+        console.log("Too bad! The computer won!");
+    } else {
+        console.log("Nobody won.");
+    }
+}
