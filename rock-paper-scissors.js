@@ -1,5 +1,3 @@
-// Get the computer's choice from one of: rock, paper, scissors
-
 /**
  * Randomly returns "rock", "paper", or "scissors".
  * getComputerchoice takes no arguments.
@@ -19,8 +17,6 @@ function getComputerChoice() {
     }
 }
 
-// Get the human's choice from one of: rock, paper, scissors
-
 /**
  * Prompts the user for "rock", "paper", or "scissors" and returns it.
  * getHumanChoice takes no arguments.
@@ -37,11 +33,6 @@ function getHumanChoice() {
 
     return choice;
 }
-
-// Determine who won the round:
-// - Rock beats scissors
-// - Scissors beats paper
-// - Paper beats rock
 
 /**
  * Determines who won a round of rock-paper-scissors.
@@ -98,6 +89,10 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
+/**
+ * Plays five rounds of rock-paper-scissors
+ * Takes no parameters and returns nothing. This is the game loop.
+ */
 function playGame() {
     // Initialize the score variables
     let humanScore = 0;
