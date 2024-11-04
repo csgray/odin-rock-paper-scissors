@@ -1,5 +1,23 @@
 // Get the computer's choice from one of: rock, paper, scissors
 
+/**
+ * getComputerchoice takes no arguments.
+ * The return value is one of "rock", "paper", or "scissors".
+ */
+function getComputerChoice() {
+    // Generates a random number between 0 and 2 inclusive then returns rock,
+    // paper, or scissors based on that number.
+    const choiceOfThree = Math.floor(Math.random() * 3);
+    switch (choiceOfThree) {
+        case 0:
+            return "rock";
+        case 1:
+            return "paper";
+        case 2:
+            return "scissors";
+    }
+}
+
 // Get the human's choice from one of: rock, paper, scissors
 
 // Determine who won the round:
