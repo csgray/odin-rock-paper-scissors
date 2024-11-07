@@ -89,5 +89,8 @@ function playRound(event) {
 }
 
 // 
-choices = document.getElementById("choices");
-choices.addEventListener("click", playRound);
+const choices = document.querySelectorAll(".choice");
+for (const choice of choices) {
+    choice.addEventListener("click", playRound);
+}
+
