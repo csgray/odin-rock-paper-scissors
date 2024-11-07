@@ -11,11 +11,6 @@
 
 <body>
   <h1>Rock-Paper-Scissors</h1>
-  <div>
-    <h2>Score</h2>
-    <p>Human: <span id="human">0</span></p>
-    <p>Computer: <span id="computer">0</span></p>
-  </div>
 
   <div>
     <h2>Make Your Choice</h2>
@@ -24,7 +19,20 @@
       <button class="choice" id="paper">&#x1F4C3 paper</button>
       <button class="choice" id="scissors">&#x2702 scissors</button>
     </div>
-    <ul id="output"></ul>
+    <ul id="output">
+      <!-- Reserve space for output line items -->
+      <br>
+      <br>
+      <br>
+    </ul>
+  </div>
+
+  <div>
+    <h2>Score</h2>
+    <ul>
+      <li>Human: <span id="human">0</span></lip>
+      <li>Computer: <span id="computer">0</span></li>
+    </ul>
   </div>
 
   <h2 id="result"></h2>
