@@ -18,116 +18,76 @@ function getComputerChoice() {
 }
 
 /**
- * Prompts the user for "rock", "paper", or "scissors" and returns it.
- * getHumanChoice takes no arguments.
- * @returns one of "rock", "paper", or "scissors".
- */
-function getHumanChoice() {
-    let choice = "";
-
-    // do...while will continue to prompt until the user inputs a valid option
-    do {
-        // Immediately converts the user's answer to lowercase
-        choice = prompt("Enter 'rock', 'paper', or 'scissors'.").toLowerCase();
-    } while (!["rock", "paper", "scissors"].includes(choice))
-
-    return choice;
-}
-
-/**
  * Determines who won a round of rock-paper-scissors.
- * It outputs a message explaining the outcome to the user and returns who won.
- * @param {*} humanChoice must be one of "rock", "paper", or "scissors"
- * @param {*} computerChoice must be one of "rock", "paper", or "scissors"
- * @returns one of "human", "computer", or "tie"
+ * It increments the human or computer score as appropriate.
+ * @param {*} event 
  */
-function playRound(humanChoice, computerChoice) {
-    console.log(`You chose: ${humanChoice}`)
-    console.log(`The computer chose: ${computerChoice}`)
+function playRound(event) {
+    human = document.getElementById("human");
+    humanScore = Number.parseInt(human.textContent);
 
+    computer = document.getElementById("computer");
+    computerScore = Number.parseInt(computer.textContent);
+
+    output = document.getElementById("output");
+    output.replaceChildren(); // Clear previous output 
+
+    humanChoice = event.target.id;
+    li = document.createElement("li");
+    li.textContent = `You chose: ${humanChoice}`;
+    output.appendChild(li);
+
+    computerChoice = getComputerChoice();
+    li = document.createElement("li");
+    li.textContent = `The computer chose: ${computerChoice}`;
+    output.appendChild(li);
+
+    li = document.createElement("li");
     if (humanChoice === "rock") {
         if (computerChoice === "rock") {
-            console.log("Tie! Both you and the computer chose rock.")
-            return "tie"
+            li.textContent = "Tie! Both you and the computer chose rock."
         } else if (computerChoice === "paper") {
-            console.log("You lose! Paper covers rock.")
-            return "computer"
+            li.textContent = "You lose! Paper covers rock."
+            computerScore++;
         } else if (computerChoice === "scissors") {
-            console.log("You win! Rock crushes scissors.")
-            return "human"
+            li.textContent = "You win! Rock crushes scissors."
+            humanScore++;
         } else {
             throw new SyntaxError(`${computerChoice} is an invalid computerChoice!`)
         }
     } else if (humanChoice === "paper") {
         if (computerChoice === "rock") {
-            console.log("You win! Paper covers rock.")
-            return "human"
+            li.textContent = "You win! Paper covers rock."
+            humanScore++;
         } else if (computerChoice === "paper") {
-            console.log("Tie! Both you and the computer chose paper.")
-            return "tie"
+            li.textContent = "Tie! Both you and the computer chose paper."
         } else if (computerChoice === "scissors") {
-            console.log("You lose! Scissors cut paper.")
-            return "computer"
+            li.textContent = "You lose! Scissors cut paper."
+            computerScore++;
         } else {
             throw new SyntaxError(`${computerChoice} is an invalid computerChoice!`)
         }
     } else if (humanChoice === "scissors") {
         if (computerChoice === "rock") {
-            console.log("You lose! Rock crushes scissors.")
-            return "computer"
+            li.textContent = "You lose! Rock crushes scissors."
+            computerScore++;
         } else if (computerChoice === "paper") {
-            console.log("You win! Scissors cut paper.")
-            return "human"
+            li.textContent = "You win! Scissors cut paper."
+            humanScore++;
         } else if (computerChoice === "scissors") {
-            console.log("Tie! Both you and the computer chose scissors.")
-            return "tie"
+            li.textContent = "Tie! Both you and the computer chose scissors."
         } else {
             throw new SyntaxError(`${computerChoice} is an invalid computerChoice!`)
         }
     } else {
         throw new SyntaxError(`${humanChoice} is an invalid humanChoice!`)
     }
+
+    output.appendChild(li);
+    human.textContent = humanScore;
+    computer.textContent = computerScore;
 }
 
-/**
- * Plays five rounds of rock-paper-scissors
- * Takes no parameters and returns nothing. This is the game loop.
- */
-function playGame() {
-    // Initialize the score variables
-    let humanScore = 0;
-    let computerScore = 0;
-    let ties = 0;
-
-    // Play five rounds
-    for (round = 0; round < 5; round++) {
-        // Computers count from 0 but people count from 1
-        console.log(`Round ${round + 1}`)
-
-        winner = playRound(getHumanChoice(), getComputerChoice());
-
-        // Increment the winner's (computer or human) score
-        if (winner === "human") {
-            humanScore++;
-        } else if (winner === "computer") {
-            computerScore++;
-        } else if (winner === "tie") {
-            ties++;
-        } else {
-            throw new SyntaxError(`${winner} is an invalid winner!`);
-        }
-    }
-
-    console.log("After five rounds, the score is")
-    console.log(`Human: ${humanScore}, Computer: ${computerScore}, Ties: ${ties}`)
-
-    // Determine whoever won the most out of five rounds
-    // and announce the winner
-    if (humanScore > computerScore) {
-        console.log("Congratulations! You won!");
-    } else if (computerScore > humanScore) {
-        console.log("Too bad! The computer won!");
-    } else {
-        console.log("Nobody won.");
-    }
-}
+// 
+choices = document.getElementById("choices");
+choices.addEventListener("click", playRound);
