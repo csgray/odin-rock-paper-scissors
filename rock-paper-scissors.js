@@ -47,32 +47,32 @@ function playRound(event) {
         if (computerChoice === "rock") {
             li.textContent = "Tie! Both you and the computer chose rock."
         } else if (computerChoice === "paper") {
-            li.textContent = "You lose! Paper covers rock."
+            li.textContent = "You lose the round! Paper covers rock."
             computerScore++;
         } else if (computerChoice === "scissors") {
-            li.textContent = "You win! Rock crushes scissors."
+            li.textContent = "You win the round! Rock crushes scissors."
             humanScore++;
         } else {
             throw new SyntaxError(`${computerChoice} is an invalid computerChoice!`)
         }
     } else if (humanChoice === "paper") {
         if (computerChoice === "rock") {
-            li.textContent = "You win! Paper covers rock."
+            li.textContent = "You win the round! Paper covers rock."
             humanScore++;
         } else if (computerChoice === "paper") {
             li.textContent = "Tie! Both you and the computer chose paper."
         } else if (computerChoice === "scissors") {
-            li.textContent = "You lose! Scissors cut paper."
+            li.textContent = "You lose the round! Scissors cut paper."
             computerScore++;
         } else {
             throw new SyntaxError(`${computerChoice} is an invalid computerChoice!`)
         }
     } else if (humanChoice === "scissors") {
         if (computerChoice === "rock") {
-            li.textContent = "You lose! Rock crushes scissors."
+            li.textContent = "You lose the round! Rock crushes scissors."
             computerScore++;
         } else if (computerChoice === "paper") {
-            li.textContent = "You win! Scissors cut paper."
+            li.textContent = "You win the round! Scissors cut paper."
             humanScore++;
         } else if (computerChoice === "scissors") {
             li.textContent = "Tie! Both you and the computer chose scissors."
@@ -86,6 +86,21 @@ function playRound(event) {
     output.appendChild(li);
     human.textContent = humanScore;
     computer.textContent = computerScore;
+
+    // End the game when either the human or computer hit five points
+    if (humanScore >= 5 || computerScore >= 5) {
+        result = document.getElementById("result");
+
+        if (humanScore >= 5) {
+            result.textContent = "Congratulations! You won the game!"
+        } else {
+            result.textContent = "Too bad! The computer won the game!"
+        }
+
+        for (const choice of choices) {
+            choice.removeEventListener("click", playRound); // Disable the game
+        }
+    }
 }
 
 // 
@@ -93,4 +108,5 @@ const choices = document.querySelectorAll(".choice");
 for (const choice of choices) {
     choice.addEventListener("click", playRound);
 }
+
 
